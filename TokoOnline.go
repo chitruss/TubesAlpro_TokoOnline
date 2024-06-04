@@ -400,7 +400,7 @@ func lihatBarang(T *toko) {
 	fmt.Println("Silahkan dipilih angka dari perintah yang ingin dilakukan")
 	fmt.Println("--------------------------------------------------------------")
 	fmt.Scan(&pilihan)
-/
+
 	if pilihan == 1 {
 		sortBarang(T, true)
 	} else if pilihan == 2 {
