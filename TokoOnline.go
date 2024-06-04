@@ -392,12 +392,47 @@ func cetakStruk(t transaksi, b barang, pembeli string) {
 
 // untuk melihat barang yg tersedia di toko
 func lihatBarang(T *toko) {
+	var pilihan int
+	fmt.Println("--------------------------------------------------------------")
+	fmt.Println("1. Urutkan Harga Ascending (Rendah ke Tinggi)")
+	fmt.Println("2. Urutkan Harga Descending (Tinggi ke Rendah)")
+	fmt.Println("3. Lihat Tanpa Urutkan")
+	fmt.Println("Silahkan dipilih angka dari perintah yang ingin dilakukan")
+	fmt.Println("--------------------------------------------------------------")
+	fmt.Scan(&pilihan)
+/
+	if pilihan == 1 {
+		sortBarang(T, true)
+	} else if pilihan == 2 {
+		sortBarang(T, false)
+	}
+
 	fmt.Println("--------------------------------------------------------------")
 	fmt.Println("Daftar Barang:")
 	for i := 0; i < T.totBarang; i++ {
 		fmt.Printf("Nama: %s, Harga: %.2f, Stok: %d, Toko: %s\n", T.arrBarang[i].Nama, T.arrBarang[i].Harga, T.arrBarang[i].Stok, T.arrBarang[i].Penjual)
 	}
 	fmt.Println("--------------------------------------------------------------")
+}
+
+func sortBarang(T *toko, ascending bool) {
+	for i := 0; i < T.totBarang-1; i++ {
+		idx := i
+		for j := i + 1; j < T.totBarang; j++ {
+			if ascending {
+				if T.arrBarang[j].Harga < T.arrBarang[idx].Harga {
+					idx = j
+				}
+			} else {
+				if T.arrBarang[j].Harga > T.arrBarang[idx].Harga {
+					idx = j
+				}
+			}
+		}
+		if idx != i {
+			T.arrBarang[i], T.arrBarang[idx] = T.arrBarang[idx], T.arrBarang[i]
+		}
+	}
 }
 
 // Kerjaan Admin
